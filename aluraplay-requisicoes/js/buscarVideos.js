@@ -7,16 +7,22 @@ const lista = document.querySelector("[data-lista]");
 const inputTexto = document.querySelector('[data-inputPesquisa]');
 
 
+inputTexto.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        botaoPesquisa.click();
+    }
+});
 
-inputTexto.addEventListener('change',()=>{
 
-
-    if (inputTexto.value == null){ 
+inputTexto.addEventListener('input', () => {
+    if (!inputTexto.value.trim()) { 
         mostrarVideos.apagarVideos();
         mostrarVideos.listaVideo();
-     }
-
+    }
 });
+
+
 
 
 botaoPesquisa.addEventListener('click',async evento=>{
