@@ -27,9 +27,16 @@ async function listaVideo(){
         constroiCard(element.titulo,element.descricao,element.url,element.imagem)));
 }
 
+function apagarVideos(){
+    const listaVideosVisiveis = document.querySelectorAll(".videos__item");
+    listaVideosVisiveis.forEach(element=>element.remove());
+
+};
+
+
 const lista = document.querySelector("[data-lista]");
 listaVideo();
 
 export const mostrarVideos = {
-    constroiCard,listaVideo
+    constroiCard,listaVideo,apagarVideos
 }

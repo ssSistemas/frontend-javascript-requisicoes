@@ -4,20 +4,30 @@ import { mostrarVideos } from "./mastarvideos.js";
 
 const botaoPesquisa = document.querySelector('[data-buscarVideo]');
 const lista = document.querySelector("[data-lista]");
+const inputTexto = document.querySelector('[data-inputPesquisa]');
 
 
 
+inputTexto.addEventListener('change',()=>{
+
+
+    if (inputTexto.value == null){ 
+        mostrarVideos.apagarVideos();
+        mostrarVideos.listaVideo();
+     }
+
+});
 
 
 botaoPesquisa.addEventListener('click',async evento=>{
 
-    const input = document.querySelector('[data-inputPesquisa]').value;
+    const input = inputTexto.value;
 
     console.log(input);
 
     if (input===""){
-        apagarVideos();
-        listaVideo();
+        mostrarVideos.apagarVideos();
+        await mostrarVideos.listaVideo();
         return;
     }
     
@@ -25,9 +35,9 @@ botaoPesquisa.addEventListener('click',async evento=>{
     
     if(listaJson.length===0){
         
-        apagarVideos();
+        mostrarVideos.apagarVideos();
     }else{
-        apagarVideos();
+        mostrarVideos.apagarVideos();
 
 
 
@@ -42,9 +52,4 @@ botaoPesquisa.addEventListener('click',async evento=>{
 ;
 
 
-function apagarVideos(){
-    const listaVideosVisiveis = document.querySelectorAll(".videos__item");
-    listaVideosVisiveis.forEach(element=>element.remove());
-
-};
 
