@@ -6,24 +6,37 @@ async function listaVideos() {
     return conexaoJson;
 }
 
-async function addVideos() {
-    const conexao = await fetch("http://localhost:3000/videos",{
-          headers:{
-                "Content-Type":"application/json"
+async function addVideos(titulo, descricao, url, imagem) {
+    try {
+        const conexao = await fetch("http://localhost:3000/videos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-            method:"POST",
-            body:JSON.stringify({
-                titulo:titulo,
-                descricao:`${descricao} mil visuzalizações`,
-                url:url,
-                imagem:imagem
-            })    
+            body: JSON.stringify({
+                titulo: titulo,
+                descricao: `${descricao} mil visualizações`,
+                url: url,
+                imagem: imagem,
+            }),
+        });
 
-}    
-    );
-    const conexaoJson=await conexao.json();
-    return conexaoJson;
+        if (!conexao.ok) {
+            throw new Error(`Erro na requisição: ${conexao.statusText}`);
+        }
+
+        console.log("Requisição POST bem-sucedida!");
+        const conexaoJson = await conexao.json();
+    
+
+        return conexaoJson;
+    } catch (error) {
+        console.error(`Erro na função addVideos: ${error.message}`);
+        throw error;
+    }
 }
+
+
 
 export const conexaoAPI = {
     listaVideos,addVideos
