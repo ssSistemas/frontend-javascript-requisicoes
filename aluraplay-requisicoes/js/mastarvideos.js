@@ -17,7 +17,8 @@ function constroiCard(titulo,descricao,url,imagem){
         </div>
     `;
     return video;
-}
+};
+
 
 
 async function listaVideo(){
@@ -29,4 +30,6 @@ async function listaVideo(){
 const lista = document.querySelector("[data-lista]");
 listaVideo();
 
-
+export const mostrarVideos = {
+    constroiCard,listaVideo
+}
