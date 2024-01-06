@@ -1,23 +1,9 @@
 
 
-async function listaVideos(termoBusca) {
-try {
-    if (termoBusca==null || termoBusca==undefined || termoBusca=="") {
-        
-        const conexao = await fetch("http://localhost:3000/videos");
-        const conexaoJson=await conexao.json();
-        return conexaoJson;
-    }else{
-        const conexao = await fetch(`http://localhost:3000/videos?_embed=videos&titulo_like=${termoBusca}`);
-        const conexaoJson=await conexao.json();
-        return conexaoJson;
-        
-    }
-}catch (error) {
-    alert("Não foi possível comunicar com o servidor.Tente novamente mais tarde.");    
-}
-
-
+async function listaVideos() {
+    const conexao = await fetch("http://localhost:3000/videos");
+    const conexaoJson=await conexao.json();
+    return conexaoJson;
 }
 
 async function addVideos(titulo, descricao, url, imagem) {
@@ -51,9 +37,23 @@ async function addVideos(titulo, descricao, url, imagem) {
 }
 
 
+async function buscarVideo(termoBusca){
+    const conexao = await fetch(`http://localhost:3000/videos?q=${termoBusca}`);
+    const conexaoJson = await conexao.json();
+    return conexaoJson;
+}
+
+
+function buscarVideo2(termoBusca){ 
+    return fetch(`http://localhost:3000/videos?q=${termoBusca}`)
+    .then(conexao=>conexao.json())
+    .then(conexaoJson=>conexaoJson)
+    .catch(error=>error);
+    
+}
 
 
 export const conexaoAPI = {
-    listaVideos,addVideos
+    listaVideos,addVideos,buscarVideo,buscarVideo2
 }
 
