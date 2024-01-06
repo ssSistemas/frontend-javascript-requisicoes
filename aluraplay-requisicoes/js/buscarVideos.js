@@ -1,5 +1,5 @@
 import { conexaoAPI } from "./conectAPI.js";
-import { mostrarVideos } from "./mastarvideos.js";
+import { mostrarVideos } from "./manipularvideos.js";
 
 
 const botaoPesquisa = document.querySelector('[data-buscarVideo]');
@@ -30,13 +30,13 @@ botaoPesquisa.addEventListener('click', async evento => {
     const input = inputTexto.value;
 
 
-    if (input === "" || input == null) {
+    if (!input) {
         mostrarVideos.apagarVideos();
         await mostrarVideos.listaVideo();
         return;
     }
 
-    const listaJson = await conexaoAPI.buscarVideo(input);
+    const listaJson = await conexaoAPI.listaVideos(input);
 
     if (listaJson.length === 0) {
 
