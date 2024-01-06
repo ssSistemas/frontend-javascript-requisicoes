@@ -16,7 +16,7 @@ inputTexto.addEventListener('keydown', (event) => {
 
 
 inputTexto.addEventListener('input', () => {
-    if (!inputTexto.value.trim()) { 
+    if (!inputTexto.value.trim()) {
         mostrarVideos.apagarVideos();
         mostrarVideos.listaVideo();
     }
@@ -25,37 +25,36 @@ inputTexto.addEventListener('input', () => {
 
 
 
-botaoPesquisa.addEventListener('click',async evento=>{
+botaoPesquisa.addEventListener('click', async evento => {
 
     const input = inputTexto.value;
 
-    console.log(input);
 
-    if (input===""){
+    if (input === "" || input == null) {
         mostrarVideos.apagarVideos();
         await mostrarVideos.listaVideo();
         return;
     }
-    
+
     const listaJson = await conexaoAPI.buscarVideo(input);
-    
-    if(listaJson.length===0){
-        
+
+    if (listaJson.length === 0) {
+
         mostrarVideos.apagarVideos();
-    }else{
+    } else {
         mostrarVideos.apagarVideos();
 
 
 
         listaJson.forEach(element => lista.appendChild(
-            mostrarVideos.constroiCard(element.titulo,element.descricao,element.url,element.imagem)));
+            mostrarVideos.constroiCard(element.titulo, element.descricao, element.url, element.imagem)));
     }
-        
-    
 
-    
+
+
+
 })
-;
+    ;
 
 
 
